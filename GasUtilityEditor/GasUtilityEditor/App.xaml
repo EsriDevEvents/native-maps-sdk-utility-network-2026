@@ -1,0 +1,98 @@
+﻿<Application x:Class="GasUtilityEditor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GasUtilityEditor"
+             Startup="OnStartup"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <CalciteResources xmlns="http://schemas.esri.com/calcite/2024"
+                                  Theme="Light" />
+                <ResourceDictionary>
+
+                    <local:VisibilityConverter x:Key="VisibilityConverter" />
+                    <Style  x:Key="AlternatingRowStyle"
+                            TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex"
+                                     Value="0">
+                                <Setter Property="Background"
+                                        Value="#F8F8F8"></Setter>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex"
+                                     Value="1">
+                                <Setter Property="Background"
+                                        Value="#EAEAEA"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style x:Key="ExpandableGroupStyle"
+                           TargetType="GroupItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GroupItem">
+                                    <Expander IsExpanded="True">
+                                        <Expander.Header>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock FontWeight="Bold"
+                                                           Text="{Binding Name}" />
+                                                <TextBlock Foreground="LightGray"
+                                                           Text="{Binding ItemCount}"
+                                                           Grid.Column="1" />
+                                                <TextBlock Foreground="LightGray"
+                                                           Text=" item(s)"
+                                                           Grid.Column="2" />
+                                            </Grid>
+                                        </Expander.Header>
+                                        <Expander.Content>
+                                            <ItemsPresenter />
+                                        </Expander.Content>
+                                    </Expander>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <DataTemplate x:Key="SymbolTemplate">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="50"
+                                   Height="50"
+                                   Margin="2"
+                                   Source="{Binding ImageSource}" />
+                            <TextBlock Grid.Column="1"
+                                       Margin="2"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Template.Name}" />
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="ToolTemplate">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="25"
+                                   Height="25"
+                                   Margin="2"
+                                   Source="{Binding ImageSource}" />
+                            <TextBlock Grid.Column="1"
+                                       Margin="2"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding ToolName}" />
+                        </Grid>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
